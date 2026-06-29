@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Index Label"; ObjectID = "0xJ-HF-OQl"; */
+"0xJ-HF-OQl.text" = "Index Label";
+
+/* Class = "UIButton"; normalTitle = "Нет"; ObjectID = "8io-t5-i67"; */
+"8io-t5-i67.normalTitle" = "Нет";
+
+/* Class = "UILabel"; text = "Рейтинг этого фильма меньше, чем 5?"; ObjectID = "BRr-cl-Cm7"; */
+"BRr-cl-Cm7.text" = "Рейтинг этого фильма меньше, чем 5?";
+
+/* Class = "UIButton"; normalTitle = "Да"; ObjectID = "bmw-ct-kwc"; */
+"bmw-ct-kwc.normalTitle" = "Да";
+
+/* Class = "UILabel"; text = "Question Title Label"; ObjectID = "leq-Wb-K0l"; */
+"leq-Wb-K0l.text" = "Question Title Label";
