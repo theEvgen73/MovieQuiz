@@ -7,6 +7,8 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
+    @IBOutlet private var noButton: UIButton!
+    @IBOutlet private var yesButton: UIButton!
     
     // MARK: - Private Properties
     
@@ -77,6 +79,9 @@ final class MovieQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 20
+        
         let currentQuestion = questions[currentQuestionIndex]
         let viewModel = convert(model: currentQuestion)
         show(quiz: viewModel)
@@ -111,6 +116,9 @@ final class MovieQuizViewController: UIViewController {
         imageView.image = step.image
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
+        
+        noButton.isEnabled = true
+        yesButton.isEnabled = true
     }
     
     // показ результатов раунда
@@ -136,36 +144,38 @@ final class MovieQuizViewController: UIViewController {
     }
     
     private func showAnswerResult(isCorrect: Bool) {
-            if isCorrect {
-                correctAnswers += 1
-            }
-            
-            imageView.layer.masksToBounds = true
-            imageView.layer.borderWidth = 8
-            imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
-            imageView.layer.cornerRadius = 20
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-                self?.showNextQuestionOrResults()
-            }
+        noButton.isEnabled = false
+        yesButton.isEnabled = false
+        if isCorrect {
+            correctAnswers += 1
         }
         
-        // переход к следующему вопросу или показу результатов
-        private func showNextQuestionOrResults() {
-            if currentQuestionIndex == questions.count - 1 {
-                let text = "Ваш результат: \(correctAnswers)/\(questions.count)"
-                let viewModel = QuizResultsViewModel(
-                    title: "Этот раунд окончен!",
-                    text: text,
-                    buttonText: "Сыграть ещё раз")
-                show(quiz: viewModel)
-            } else {
-                currentQuestionIndex += 1
-                
-                let nextQuestion = questions[currentQuestionIndex]
-                let viewModel = convert(model: nextQuestion)
-                
-                show(quiz: viewModel)
-            }
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 8
+        imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
+        imageView.layer.cornerRadius = 20
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            self?.showNextQuestionOrResults()
         }
     }
+    
+    // переход к следующему вопросу или показу результатов
+    private func showNextQuestionOrResults() {
+        if currentQuestionIndex == questions.count - 1 {
+            let text = "Ваш результат: \(correctAnswers)/\(questions.count)"
+            let viewModel = QuizResultsViewModel(
+                title: "Этот раунд окончен!",
+                text: text,
+                buttonText: "Сыграть ещё раз")
+            show(quiz: viewModel)
+        } else {
+            currentQuestionIndex += 1
+            
+            let nextQuestion = questions[currentQuestionIndex]
+            let viewModel = convert(model: nextQuestion)
+            
+            show(quiz: viewModel)
+        }
+    }
+}
