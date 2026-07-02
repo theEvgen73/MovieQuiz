@@ -117,6 +117,8 @@ final class MovieQuizViewController: UIViewController {
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
         
+        imageView.layer.borderWidth = 0
+        
         noButton.isEnabled = true
         yesButton.isEnabled = true
     }
