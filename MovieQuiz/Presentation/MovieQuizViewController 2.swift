@@ -1,6 +1,15 @@
+//
+//  MovieQuizViewController 2.swift
+//  MovieQuiz
+//
+//  Created by Евгений Папроцкий on 16.07.2026.
+//
+
+
 import UIKit
 
-final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
+final class MovieQuizViewController: UIViewController {
+    
     // MARK: - IBOutlet
     
     @IBOutlet private var imageView: UIImageView!
@@ -14,35 +23,21 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var currentQuestionIndex = 0
     private var correctAnswers = 0
     private let questionsAmount: Int = 10
-    private var questionFactory: QuestionFactoryProtocol?
+    private let questionFactory: QuestionFactory = QuestionFactory()
     private var currentQuestion: QuizQuestion?
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Настройка внешнего вида
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 20
         
-        // Создаём фабрику вопросов
-        let factory = QuestionFactory()
-        factory.setup(delegate: self)
-        self.questionFactory = factory
-        
-        // Загружаем первый вопрос
-        factory.requestNextQuestion()
-    }
-    // MARK: - QuestionFactoryDelegate
-    func didReceiveNextQuestion(question: QuizQuestion?) {
-        guard let question = question else {
-            return
-        }
-
-        currentQuestion = question
-        let viewModel = convert(model: question)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.show(quiz: viewModel)
+        if let firstQuestion = questionFactory.requestNextQuestion() {
+            currentQuestion = firstQuestion
+            let viewModel = convert(model: firstQuestion)
+            show(quiz: viewModel)
         }
     }
     
