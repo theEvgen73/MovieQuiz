@@ -68,19 +68,10 @@ final class StatisticService: StatisticServiceProtocol {
     // MARK: - StatisticServiceProtocol Methods
     
     func store(correct count: Int, total amount: Int) {
-        // Обновляем общее количество правильных ответов
         totalCorrectAnswers += count
-        
-        // Обновляем общее количество вопросов
         totalQuestionsAsked += amount
-        
-        // Увеличиваем счётчик игр
         gamesCount += 1
-        
-        // Создаём результат текущей игры
         let currentResult = GameResult(correct: count, total: amount, date: Date())
-        
-        // Сравниваем с лучшим результатом и обновляем, если нужно
         if currentResult.isBetterThan(bestGame) {
             bestGame = currentResult
         }

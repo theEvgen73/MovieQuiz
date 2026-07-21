@@ -88,16 +88,31 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     private func show(quiz result: QuizResultsViewModel) {
         let message = makeResultMessage()
+        
         let model = AlertModel(
-            title: result.title,
-            message: result.text,
-            buttonText: result.buttonText
+            title: "Этот раунд окончен!",
+            message: message,  // ✅ Передаем сформированное сообщение
+            buttonText: "Сыграть ещё раз"
         ) { [weak self] in
             guard let self = self else { return }
             self.resetGame()
         }
         
         alertPresenter.show(in: self, model: model)
+    }
+
+    private func makeResultMessage() -> String {
+        let currentResult = "Ваш результат: \(correctAnswers)/\(questionsAmount)"
+        
+        let gamesCount = "Количество сыгранных квизов: \(statisticService.gamesCount)"
+        
+        let bestGame = statisticService.bestGame
+        let bestGameText = "Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))"
+        
+        let accuracy = String(format: "%.2f", statisticService.totalAccuracy)
+        let accuracyText = "Средняя точность: \(accuracy)%"
+        
+        return [currentResult, gamesCount, bestGameText, accuracyText].joined(separator: "\n")
     }
     
     
@@ -118,9 +133,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     
     private func showNextQuestionOrResults() {
-        statisticService.store(correct: correctAnswers, total: questionsAmount)
-        
         if currentQuestionIndex == questionsAmount - 1 {
+            statisticService.store(correct: correctAnswers, total: questionsAmount)
+            
             let text = "Ваш результат: \(correctAnswers)/\(questionsAmount)"
             let viewModel = QuizResultsViewModel(
                 title: "Этот раунд окончен!",
