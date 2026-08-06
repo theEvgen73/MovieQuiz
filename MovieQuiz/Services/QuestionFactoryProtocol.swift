@@ -1,5 +1,6 @@
 import Foundation
 
 protocol QuestionFactoryProtocol: AnyObject {
-    func requestNextQuestion() 
+    func requestNextQuestion()
+    func loadData()  
 }
