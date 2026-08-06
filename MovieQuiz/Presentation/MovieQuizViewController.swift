@@ -58,6 +58,15 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     func didFailToLoadData(with error: Error) {
         showNetworkError(message: error.localizedDescription)
     }
+    
+    func didStartLoadingImage() {
+        showLoadingIndicator()
+    }
+    
+    func didFinishLoadingImage() {
+        hideLoadingIndicator()
+    }
+    
     // MARK: - IBAction
     
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
@@ -78,7 +87,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     // MARK: - Private Methods
     
-    // ✅ Исправлено: image — это Data, создаём UIImage из Data
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         let image = UIImage(data: model.image) ?? UIImage()
         return QuizStepViewModel(
@@ -113,7 +121,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         alertPresenter.show(in: self, model: model)
     }
     
-    // ✅ Удалён дубликат, оставлен только один
     private func makeResultMessage() -> String {
         let currentResult = "Ваш результат: \(correctAnswers)/\(questionsAmount)"
         let gamesCount = "Количество сыгранных квизов: \(statisticService.gamesCount)"
