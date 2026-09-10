@@ -7,11 +7,14 @@ protocol MoviesLoading {
 
 // MARK: - Implementation
 struct MoviesLoader: MoviesLoading {
-    private let networkClient = NetworkClient()
+    private let networkClient: NetworkRouting
     
-    // ✅ URL для запроса (исправлено: добавлено свойство)
+    init(networkClient: NetworkRouting = NetworkClient()) {
+        self.networkClient = networkClient
+    }
+    
     private var mostPopularMoviesUrl: URL {
-        guard let url = URL(string: "https://tv-api.com/en/API/Top250Movies/k_zcuw1ytf") else {
+        guard let url = URL(string: "https://tv-api.com/en/API/Top250Movies/k_j4r66gt6") else {
             preconditionFailure("Unable to construct mostPopularMoviesUrl")
         }
         return url
@@ -22,10 +25,8 @@ struct MoviesLoader: MoviesLoading {
             switch result {
             case .success(let data):
                 do {
-                    // ✅ Исправлено: MostPopularMovies.self (с заглавной)
                     let mostPopularMovies = try JSONDecoder().decode(MostPopularMovies.self, from: data)
                     
-                    // ✅ Проверяем errorMessage
                     if !mostPopularMovies.errorMessage.isEmpty {
                         let error = NSError(
                             domain: "MoviesLoader",
@@ -34,7 +35,6 @@ struct MoviesLoader: MoviesLoading {
                         )
                         handler(.failure(error))
                     } else {
-                        // ✅ Успешный ответ
                         handler(.success(mostPopularMovies))
                     }
                 } catch {
