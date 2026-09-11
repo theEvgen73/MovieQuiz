@@ -39,6 +39,7 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Index Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAY-Z1-yL9">
                                                 <rect key="frame" x="289.66666666666669" y="0.0" width="100.33333333333331" height="23.666666666666668"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="Index"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <color key="textColor" name="ypWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -48,12 +49,14 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YLC-vM-uYG" userLabel="Preview Image">
                                         <rect key="frame" x="0.0" y="43.666666666666629" width="390" height="585"/>
                                         <color key="backgroundColor" name="ypWhite"/>
+                                        <accessibility key="accessibilityConfiguration" label="Poster"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="YLC-vM-uYG" secondAttribute="height" multiplier="2:3" id="VVc-jH-0s4"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше, чем 5?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVJ-8u-dDY">
                                         <rect key="frame" x="0.0" y="648.66666666666663" width="390" height="27.333333333333371"/>
+                                        <accessibility key="accessibilityConfiguration" label="Question"/>
                                         <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="25"/>
                                         <color key="textColor" name="ypWhite"/>
                                         <nil key="highlightedColor"/>
@@ -63,6 +66,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxS-BR-bt6">
                                                 <rect key="frame" x="0.0" y="0.0" width="185" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" label="No"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="aLU-E0-qeO"/>
                                                 </constraints>
@@ -92,6 +96,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VD-vB-MJz">
                                                 <rect key="frame" x="205" y="0.0" width="185" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" label="Yes"/>
                                                 <color key="tintColor" name="ypWhite"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Button"/>
