@@ -64,8 +64,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     
     private func didAnswer(isYes: Bool) {
         guard let currentQuestion = currentQuestion else { return }
-        let givenAnswer = isYes
-        proceedWithAnswer(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        proceedWithAnswer(isCorrect: isYes == currentQuestion.correctAnswer)
     }
     
     private func didAnswer(isCorrectAnswer: Bool) {
@@ -104,7 +103,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         questionFactory?.requestNextQuestion()
     }
     
-    // MARK: - Helpers
+    // MARK: - Functions
     func switchToNextQuestion() {
         currentQuestionIndex += 1
     }
@@ -122,7 +121,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     }
     
     // MARK: - Results
-    func makeResultsMessage() -> String {
+    private func makeResultsMessage() -> String {
         statisticService.store(correct: correctAnswers, total: questionsAmount)
         
         let bestGame = statisticService.bestGame

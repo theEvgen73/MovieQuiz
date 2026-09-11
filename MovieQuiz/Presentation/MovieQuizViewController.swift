@@ -3,16 +3,16 @@ import UIKit
 final class MovieQuizViewController: UIViewController, MovieQuizViewControllerProtocol {
     // MARK: - IBOutlet
     
-    @IBOutlet private var imageView: UIImageView!
-    @IBOutlet private var textLabel: UILabel!
-    @IBOutlet private var counterLabel: UILabel!
-    @IBOutlet private var noButton: UIButton!
-    @IBOutlet private var yesButton: UIButton!
-    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var textLabel: UILabel!
+    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private weak var noButton: UIButton!
+    @IBOutlet private weak var yesButton: UIButton!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     
     // MARK: - Properties
-    private var presenter: MovieQuizPresenter!
+    private weak var presenter: MovieQuizPresenter!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,12 +47,10 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
          yesButton.isEnabled = true
      }
      
-     func show(quiz result: QuizResultsViewModel) {
-         let message = presenter.makeResultsMessage()
-         
+     func show(quiz result: QuizResultsViewModel) {         
          let alert = UIAlertController(
              title: result.title,
-             message: message,
+             message: result.text,
              preferredStyle: .alert
          )
          
